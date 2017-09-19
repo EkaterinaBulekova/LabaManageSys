@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Tasks>
+	<Task>
+	  <Author>Ninja</Author>
+	  <Level>80</Level>
+	  <Topic>MVC</Topic>
+	  <Name>Task6</Name>
+	  <Text>Some task DDD here.....</Text>
+	</Task>
+	<Task>
+	  <Author>Alex</Author>
+	  <Level>60</Level>
+	  <Topic>MVC</Topic>
+	  <Name>Task7</Name>
+	  <Text>Some task TDD here.....</Text>
+	</Task>
+	<Task>
+	  <Author>Alex</Author>
+	  <Level>50</Level>
+	  <Topic>ORM</Topic>
+	  <Name>Task8</Name>
+	  <Text>Some task TDD here.....</Text>
+	</Task>
+	<Task>
+	  <Author>Alex</Author>
+	  <Level>40</Level>
+	  <Topic>ORM</Topic>
+	  <Name>Task9</Name>
+	  <Text>Some task TDD here.....</Text>
+	</Task>
+	<Task>
+	  <Author>Alex</Author>
+	  <Level>80</Level>
+	  <Topic>Entity</Topic>
+	  <Name>Task10</Name>
+	  <Text>Some task TDD here.....</Text>
+	</Task>
+</Tasks>

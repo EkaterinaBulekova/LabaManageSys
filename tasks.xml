@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Tasks>
+	<Task>
+	  <Author>Ninja</Author>
+	  <Level>80</Level>
+	  <Topic>DDD</Topic>
+	  <Text>Some task DDD here.....</Text>
+	</Task>
+	<Task>
+	  <Author>Alex</Author>
+	  <Level>60</Level>
+	  <Topic>TDD</Topic>
+	  <Text>Some task TDD here.....</Text>
+	</Task>
+</Tasks>

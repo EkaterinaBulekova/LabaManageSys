@@ -1,0 +1,58 @@
+﻿@model LabaManageSys.WebUI.ViewModels.TeachPlan.ListViewModel
+@{
+    ViewBag.Title = "Список курсов";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Список учебных курсов</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-condensed table-bordered">
+            <tr>
+                <th>Имя</th>
+                <th class="text-center">Действия</th>
+            </tr>
+            @foreach (var item in Model.Courses)
+            {
+                <tr>
+                    <td>@Html.ActionLink(item.Name, "Edit", new { item.CourseId })</td>
+                    <td class="text-center">
+                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#@item.CourseId">Удалить</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id=@item.CourseId role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p style="font-size: large">
+                                            Удалить курс @item.Name ?
+                                        </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        @using (Html.BeginForm("Delete", "TeachPlan"))
+                                        {
+                                            @Html.Hidden("CourseId", item.CourseId)
+                                            <input type="submit"
+                                                   class="btn btn-danger"
+                                                   value="Удалить" />
+                                                <button class="btn btn-default" data-dismiss="modal">Отменить</button>
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="panel-footer">
+        @Html.ActionLink("Добавить курс", "Create", null,
+            new { @class = "btn btn-default" })
+    </div>
+</div>

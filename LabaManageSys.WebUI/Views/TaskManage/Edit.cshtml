@@ -1,0 +1,63 @@
+﻿@model LabaManageSys.WebUI.ViewModels.Task.EditViewModel
+@{
+    ViewBag.Title = "Панель: редактирование заданий";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        @if (Model.Task.Name != null && Model.Task.Name != string.Empty)
+        {
+            <h3> Редактируем задание - "@Model.Task.Name"</h3>
+        }
+        else
+        {
+            <h3> Добавляем новое задание</h3>
+        }
+    </div>
+    @Html.ValidationSummary(false)
+    @using (Html.BeginForm("Edit", "TaskManage"))
+    {
+        <div class="panel-body">
+            <div> <p>@Html.HiddenFor(_ => _.Task.TaskId)</p> </div>
+            <div class="form-group">
+                <p>@Html.LabelFor(_ => _.Task.Author)</p>
+                <div>
+                    <p>@Html.EditorFor(_ => _.Task.Author)</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <p>@Html.LabelFor(_ => _.Task.Topic)</p>
+                <div>
+                    <p>@Html.EditorFor(_ => _.Task.Topic)</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <p>@Html.LabelFor(_ => _.Task.Level)</p>
+                <div>
+                    <p>@Html.EditorFor(_ => _.Task.Level)</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <p>@Html.LabelFor(_ => _.Task.Name)</p>
+                <div>
+                    <p>@Html.EditorFor(_ => _.Task.Name)</p>
+                </div>
+            </div>
+           <div class="form-group">
+                <p>@Html.LabelFor(_ => _.Task.Text)</p>
+                <div>
+                    @Html.TextAreaFor(_ => _.Task.Text, new { @class = "form-control", rows = 5 })
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Сохранить" class="btn btn-primary" />
+            @Html.ActionLink("Отменить изменения и вернуться к списку", "List", null, new
+           {
+               @class = "btn btn-default"
+           })
+        </div>
+    }
+</div>
+
+

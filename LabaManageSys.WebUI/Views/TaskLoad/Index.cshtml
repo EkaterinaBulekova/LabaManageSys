@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Загрузка заданий";
+}
+
+<h2>Чтобы загрузить задания выберите файл и нажмите загрузить</h2>
+@using (Html.BeginForm("UploadFile", "TaskLoad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        <input type="file" name="xmlfile">
+    </div>
+    <input type="submit" value="Загрузить">
+}
+

@@ -1,0 +1,89 @@
+﻿@model LabaManageSys.WebUI.ViewModels.TeachPlan.EditViewModel
+@{
+    ViewBag.Title = "Редактируем курс";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        @if (Model.Course.Name != null && Model.Course.Name != "")
+        {
+            <h3> Редактируем курс - "@Model.Course.Name"</h3>
+            <p> Занятия - @Model.Dates </p>
+        }
+        else
+        {
+            <h3> Добавляем новый курс</h3>
+        }
+    </div>
+
+    @using (Html.BeginForm("Edit", "TeachPlan"))
+    {
+        @Html.AntiForgeryToken();
+    <div class="panel-body">
+        <div> <p>@Html.HiddenFor(_ => _.Course.CourseId)</p> </div>
+        <div class="form-group">
+            <p>@Html.LabelFor(_ => _.Course.Name)</p>
+            <div>
+                <p>@Html.EditorFor(_ => _.Course.Name)</p>
+            </div>
+        </div>
+        <div>
+                <input size="600" style="max-width: 600px" id="Dates" type="text" name="Dates" class="datepicker-here"
+                   data-multiple-dates="20"
+                   data-multiple-dates-separator=","
+                   data-timepicker="true"
+                   data-position='right top' 
+                   data-dates="@Model.Dates"    />
+       </div>
+    </div>
+    <div class="panel-footer">
+        <input type="submit" value="Сохранить" class="btn btn-primary" />
+        @Html.ActionLink("Отменить изменения и вернуться к списку", "List", null, new
+        {
+           @class = "btn btn-default"
+        })
+    </div>
+    }
+</div>
+
+@section scripts{
+<script type="text/javascript">
+            $('#Dates').datepicker({
+                inline: true,
+                timepicker: true,
+                startHour: 9,
+                minHours: 9,
+                maxHours: 18,
+                minDate: new Date()
+            })
+            var disabledDays = [0, 6];
+
+            $('#Dates').datepicker({
+                onRenderCell: function (date, cellType) {
+                    if (cellType == 'day') {
+                        var day = date.getDay(),
+                            isDisabled = disabledDays.indexOf(day) != -1;
+
+                        return {
+                            disabled: isDisabled
+                        }
+                    }
+                }
+            })
+
+        $(document).ready(function () {
+            var myDatepicker = $('#Dates').datepicker().data('datepicker');
+            var str = $('#Dates').attr('data-dates');
+            if (str != "" && str != null) {
+                var dates = str.split(',');
+                var date = [];
+                for (var i = 0; i < dates.length; i++) {
+                    date[i] = (new Date(dates[i]));
+                }
+                myDatepicker.selectDate(date);
+            }
+        });
+    </script>
+}
+
+

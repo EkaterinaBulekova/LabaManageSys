@@ -1,0 +1,93 @@
+﻿@using LabaManageSys.WebUI.HtmlHelpers;
+@model LabaManageSys.WebUI.ViewModels.Journal.JournalEditModel
+
+@{
+    ViewBag.Title = "Журнал посещения";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Журнал посещения: @Model.Course.Name</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-condensed table-bordered">
+            <tr>
+                <th> Студент </th>
+                @foreach (var less in Model.Lessons)
+                {
+                    <th>@string.Format("{0:dd.MM.yy}", less.Date.Date)</th>
+                }
+            </tr>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <th>@user.Name</th>
+                    @foreach (var less in Model.Lessons)
+                    {
+                        if (less.Users != null && less.Users.Any(_ => _.UserId == user.UserId))
+                        {
+                            <td data-LessonId="@less.LessonId" data-UserId="@user.UserId">@string.Format("H")</td>
+                        }
+                        else
+                        {
+                            <td data-LessonId="@less.LessonId" data-UserId="@user.UserId">  </td>
+                        }
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="btn-group pull-right">
+        @Html.PageLinks(Model.PagingInfo, _ => Url.Action("Edit", new { courseId = Model.Course.CourseId, page = _ }))
+    </div> 
+    <div class="panel-footer">
+        @Html.ActionLink("Вернуться к списку", "List", null, new
+   {
+       @class = "btn btn-default"
+   })
+    </div>
+</div>
+
+@section scripts{
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("td").on("click", function () {
+            var dt = new FormData();
+            dt.append('lessonId', $(this).attr('data-LessonId'));
+            dt.append('userId', $(this).attr('data-UserId'));
+            if ($(this).is(":contains('H')")) {
+                $(this).text(" ");
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("RemoveUserMissLesson","Journal")",
+                    data: dt,
+                    processData: false,
+                    contentType: false,
+                    success: function () {
+                    },
+                    error: function (data) {
+                        alert("Извините произошла непредвиденная ошибка обратитись пожалуйста к администратору сайта.");
+                    }
+                });
+            }
+            else {
+                $(this).text("H");
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("AddUserMissLesson","Journal")",
+                    data: dt,
+                    processData: false,
+                    contentType: false,
+                    success: function () {
+                    },
+                    error: function (data) {
+                        alert("Извините произошла непредвиденная ошибка обратитись пожалуйста к администратору сайта.");
+                    }
+                });
+            }
+        });
+    });
+</script>
+}
+
+

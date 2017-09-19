@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tasks>
+  <Task>
+    <Author>Ninja</Author>
+    <Level>80</Level>
+    <Topic>DDD</Topic>
+    <Name>Task1</Name>
+    <Text>Some task DDD here.....</Text>
+  </Task>
+  <Task>
+    <Author>Alex</Author>
+    <Level>60</Level>
+    <Topic>TDD</Topic>
+    <Name>Task2</Name>
+    <Text>Some task TDD here.....</Text>
+  </Task>
+  <Task>
+    <Author>Alex</Author>
+    <Level>50</Level>
+    <Topic>TDD</Topic>
+    <Name>Task3</Name>
+    <Text>Some task TDD here.....</Text>
+  </Task>
+  <Task>
+    <Author>Alex</Author>
+    <Level>40</Level>
+    <Topic>TDD</Topic>
+    <Name>Task4</Name>
+    <Text>Some task TDD here.....</Text>
+  </Task>
+  <Task>
+    <Author>Alex</Author>
+    <Level>80</Level>
+    <Topic>TDD</Topic>
+    <Name>Task5</Name>
+    <Text>Some task TDD here.....</Text>
+  </Task>
+  <Task>
+    <Author>Ninja</Author>
+    <Level>80</Level>
+    <Topic>MVC</Topic>
+    <Name>Task6</Name>
+    <Text>Some task MVC here.....</Text>
+  </Task>
+  <Task>
+    <Author>Alex</Author>
+    <Level>60</Level>
+    <Topic>MVC</Topic>
+    <Name>Task7</Name>
+    <Text>Some task MVC here.....</Text>
+  </Task>
+  <Task>
+    <Author>Alex</Author>
+    <Level>40</Level>
+    <Topic>ORM</Topic>
+    <Name>Task9</Name>
+    <Text>Some task ORM here.....</Text>
+  </Task>
+  <Task>
+    <Author>Alex</Author>
+    <Level>80</Level>
+    <Topic>Entity</Topic>
+    <Name>Task10</Name>
+    <Text>Some task Entity here.....</Text>
+  </Task>
+  <Task>
+    <Author>Katrin</Author>
+    <Level>30</Level>
+    <Topic>Entity</Topic>
+    <Name>Task11</Name>
+    <Text>Some task Entity here.....</Text>
+  </Task>
+</Tasks>

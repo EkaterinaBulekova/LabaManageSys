@@ -1,0 +1,37 @@
+﻿@model LabaManageSys.WebUI.ViewModels.Role.EditViewModel
+@{
+    ViewBag.Title = "Панель: редактирование роли";
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">  
+        @if (Model.Role.Name != null && Model.Role.Name != "")
+        {
+            <h3> Редактируем роль - "@Model.Role.Name"</h3>
+        }
+        else
+        {
+            <h3> Добавляем новую роль</h3>
+        }
+    </div>
+    @Html.ValidationSummary()
+    @using (Html.BeginForm("Edit", "Role"))
+    {
+        @Html.AntiForgeryToken();
+        <div class="panel-body">
+            <div> <p>@Html.HiddenFor(_ => _.Role.RoleId)</p> </div>
+            <div class="form-group">
+                <p>@Html.LabelFor(_ => _.Role.Name)</p>
+                <div>
+                    <p>@Html.EditorFor(_ => _.Role.Name)</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Сохранить" class="btn btn-primary" />
+            @Html.ActionLink("Отменить изменения и вернуться к списку", "List", null, new
+       {
+           @class = "btn btn-default"
+       })
+        </div>
+    }
+</div>
