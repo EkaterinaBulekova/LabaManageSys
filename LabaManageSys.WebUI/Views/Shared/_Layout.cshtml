@@ -8,66 +8,75 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("LabaManageSystem", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div class="container">
+        <!-- Классы navbar и navbar-default (базовые классы меню) -->
+        <nav class="navbar navbar-inverse">
+            <!-- Контейнер (определяет ширину Navbar) -->
+            <div class="container-fluid">
+                <!-- Заголовок -->
+                <div class="navbar-header">
+                    <!-- Кнопка «Гамбургер» отображается только в мобильном виде (предназначена для открытия основного содержимого Navbar) -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main" aria-expanded="false" aria-controls="navbar-main">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Бренд или название сайта (отображается в левой части меню) -->
+                    <a class="nav navbar-brand" href="@Url.Action("Index", "Home")">
+                        <span class="hidden-xs"> </span>
+                        <span class="glyphicon glyphicon-home visible-xs" data-toggle="tooltip" title="LabaManage"></span>
+                    </a>
+                </div>
+                <!-- Основная часть меню (может содержать ссылки, формы и другие элементы) -->
+                <div class="collapse navbar-collapse" id="navbar-main">
+                    <!-- Содержимое основной части -->
+                    <ul class="nav navbar-nav">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Пользователи", "List", "User", new { area = "" }, new { @class = "btn" })</li>
+                        }
+                        @if (User.IsInRole("Administrators"))
+                        {
+                            <li>@Html.ActionLink("Роли", "List", "Role", new { area = "" }, new { @class = "btn" })</li>
+                        }
+                        @if (User.IsInRole("Teachers"))
+                        {
+                            <li>@Html.ActionLink("Учебный план", "List", "TeachPlan", new { area = "" }, new { @class = "btn" })</li>
+                            <li>@Html.ActionLink("Журнал посещаемости", "List", "Journal", new { area = "" }, new { @class = "btn" })</li>
+                            <li>@Html.ActionLink("База заданий", "List", "TaskManage", new { area = "" }, new { @class = "btn" })</li>
+                        }
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink(User.Identity.Name, "#")</li>
+                            <li>@Html.ActionLink("Выход", "Logoff", "Account", new { area = "" }, new { @class = "btn" })</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Логин", "Login", "Account", new { area = "" }, new { @class = "btn" })</li>
+                            <li>@Html.ActionLink("Регистрация", "Register", "Account", new { area = "" }, new { @class = "btn" })</li>
+                        }
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-left">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    @Html.ActionLink("Пользователи", "List", "User", new { area = "" }, new { @class = "btn" })
-                }
-                @if (User.IsInRole("Administrators"))
-                {
-                    @Html.ActionLink("Роли", "List", "Role", new { area = "" }, new { @class = "btn" })
-                }
-                @if (User.IsInRole("Teachers"))
-                {
-                    @Html.ActionLink("Учебный план", "List", "TeachPlan", new { area = "" }, new { @class = "btn" })
-                    @Html.ActionLink("Журнал посещаемости", "List", "Journal", new { area = "" }, new { @class = "btn" })
-                    @Html.ActionLink("База заданий", "List", "TaskManage", new { area = "" }, new { @class = "btn" })
-                }
-            </div>
-            <div class="navbar-right">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    @Html.ActionLink(User.Identity.Name,"#")
-                    @Html.ActionLink("Выход", "Logoff", "Account", new { area = "" }, new { @class = "btn" })
-                }
-                else
-                {
-                    @Html.ActionLink("Логин", "Login", "Account", new { area = "" }, new { @class = "btn" })
-                    @Html.ActionLink("Регистрация", "Register", "Account", new { area = "" }, new { @class = "btn" })
-                }
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="container body-content">
-        <div>
-            @if (TempData["message"] != null)
+        </nav>
+        <div class="container body-content">
+            <div>
+                @if (TempData["message"] != null)
             {
-                <div class="alert alert-success">@TempData["message"]</div>
-            }
-            @RenderBody()
+                    <div class="alert alert-success">@TempData["message"]</div>
+                }
+                @RenderBody()
+            </div>
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - LabaManageSystem</p>
+            </footer>
         </div>
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - LabaManageSystem</p>
-        </footer>
-    </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("Scripts", false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("Scripts", false)
+</div>
 </body>
 </html>

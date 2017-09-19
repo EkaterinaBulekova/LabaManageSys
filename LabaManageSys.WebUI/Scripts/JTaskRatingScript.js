@@ -1,5 +1,4 @@
-﻿// Отрисовка списка загруженных заданий
-function processTaskData(data) {
+﻿function processTaskData(data) {
     var Taskstarget = $("#TasksList");
     Taskstarget.empty();
     var PagesCount = data.TotalPages;
@@ -57,7 +56,6 @@ function processTaskData(data) {
     }
 }
 
-// Отрисовка коментариев к заданию
 function processTaskComent(data, taskId) {
     var fullid = "#coment" + taskId
     var Commentstarget = $(fullid);
@@ -101,7 +99,6 @@ function processTaskComent(data, taskId) {
     }
 }
 
-// Загрузка заданий в соответствии с фильтром
 function AjaxTask(taskLoadUrl, optionName, selectedValue, callback) {
     $.ajax({
         type: "GET",
@@ -117,7 +114,6 @@ function AjaxTask(taskLoadUrl, optionName, selectedValue, callback) {
     });
 }
 
-// Загрузка коментариев к заданию и комментария для текущего пользователя
 function AjaxComent(commentLoadUrl, taskId, callback) {
     $.ajax({
         type: "GET",
@@ -138,7 +134,6 @@ function AjaxComent(commentLoadUrl, taskId, callback) {
 }
 
 $(document).ready(function () {
-    // Работа с фильтрами
     $('select').change(function () {
         var selectedValue = $(this).val();
         var optionName = $(this).attr('name').substring(7);
@@ -146,7 +141,6 @@ $(document).ready(function () {
         AjaxTask(url, optionName, selectedValue, processTaskData)
     })
 
-    // Изменение цвета звездочек и оценки
     $("#TasksList").on('mouseover', 'a', function () {
         var id = $(this).attr('id');
         if (id != null) {
@@ -171,7 +165,6 @@ $(document).ready(function () {
         var str = $(this).attr('id').substring(0, 1);
         var url = $("#TasksList").data('request-comments-url');
 
-        // кнопка "Подробнее" раскрывается задание и коментарии
         if (str == 'f') {
             id = $(this).attr('id').substring(1);
             fullid = '#' + start + 'f' + id;
@@ -181,7 +174,6 @@ $(document).ready(function () {
             AjaxComent(url, id, processTaskComent)
         }
 
-        // кнопка "Закрыть" возвращаем все к сокращенному виду
         if (str == 'p') {
             id = $(this).attr('id').substring(1);
             fullid = '#' + start + 'f' + id;
@@ -190,7 +182,6 @@ $(document).ready(function () {
             $(fullid).show();
         }
 
-        // кнопка "Удалить" удаляем коментарий и обновляем список коментариев
         if (str == 'd') {
             id = $(this).attr('id').substring(1);
             var tid = $(this).attr('data-taskId');
@@ -216,7 +207,6 @@ $(document).ready(function () {
             });
         }
 
-        // кнопка "Сохранить" сохраняем коментарий и обновляем список коментариев
         if (str == 's') {
             id = $(this).attr('id').substring(1);
             var uid = $('#user' + id).val();

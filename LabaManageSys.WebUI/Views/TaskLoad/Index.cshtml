@@ -7,7 +7,7 @@
 @using (Html.BeginForm("UploadFile", "TaskLoad", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="form-group">
-        <input type="file" name="xmlfile">
+        <input type="file" accept="text/xml" name="xmlfile">
     </div>
     <input type="submit" value="Загрузить">
 }

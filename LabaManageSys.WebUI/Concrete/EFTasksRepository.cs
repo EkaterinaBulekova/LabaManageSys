@@ -148,7 +148,7 @@ namespace LabaManageSys.WebUI.Concrete
         {
             if (this.context.Ratings.Where(_ => _.TaskId == taskId).Count() > 0)
             {
-                return this.context.Ratings.Where(_ => _.TaskId == taskId).Average(_ => _.Evaluation);
+                return Math.Round(this.context.Ratings.Where(_ => _.TaskId == taskId).Average(_ => _.Evaluation), 1);
             }
             else
             {
