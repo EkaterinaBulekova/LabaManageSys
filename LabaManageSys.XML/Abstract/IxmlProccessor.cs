@@ -1,6 +1,7 @@
 ﻿namespace LabaManageSys.XML.Abstract
 {
-    interface IxmlProccessor
+    interface IxmlProccessor //empty interface
     {
+        
     }
 }
