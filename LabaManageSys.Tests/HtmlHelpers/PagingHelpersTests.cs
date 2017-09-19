@@ -24,7 +24,6 @@ namespace LabaManageSys.Tests.HtmlHelpers
                 ItemsPerPage = 10
             };
 
-            // Организация - настройка делегата с помощью лямбда-выражения
             Func<int, string> pageUrlDelegate = i => "Page" + i;
 
             // Действие
