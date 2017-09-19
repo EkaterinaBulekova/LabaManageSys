@@ -4,24 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - LabaManageSystem</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/datepicker.min.css" rel="stylesheet" type="text/css">
-    <script src="~/Scripts/modernizr-2.8.3.js"></script>
-    <style>
-        .navbar-inverse {
-            background-image: linear-gradient(to bottom, #0a5aaa 0%, #022f5a 100%);
-            font-size: large;
-            color:white;
-            font: 300;
-        }
-
-        .navbar-right {
-            float: right !important;
-            margin-right: 15px;
-            margin-left: 15px;
-        }
-    </style>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -53,7 +37,7 @@
             <div class="navbar-right">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    @Html.ActionLink(User.Identity.Name,"",null, new { @class = "btn", id = "UserName"})
+                    @Html.ActionLink(User.Identity.Name,"#")
                     @Html.ActionLink("Выход", "Logoff", "Account", new { area = "" }, new { @class = "btn" })
                 }
                 else
@@ -82,9 +66,8 @@
             <p>&copy; @DateTime.Now.Year - LabaManageSystem</p>
         </footer>
     </div>
-    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/datepicker.min.js"></script>
-    @RenderSection("scripts", false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("Scripts", false)
 </body>
 </html>

@@ -1,0 +1,14 @@
+﻿.navbar-inverse {
+    background-image: linear-gradient(to bottom, #0a5aaa 0%, #022f5a 100%);
+    font-size: large;
+    color: white;
+    font: 300;
+}
+
+.navbar-right {
+    float: right !important;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+
