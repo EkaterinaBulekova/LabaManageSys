@@ -39,7 +39,8 @@ namespace LabaManageSys.WebUI.Controllers
 
                 if (user != null)
                 {
-                    if (this.repository.UserPasswordValidate(user, model.Password))
+                    if (this.repository.UserPasswordValidate(user, model.Password))//if c тройной вложенностью не очень удачное решение.
+                                                                                   //лучше этого избегать. Можно совмещать условия в одном if или выносить в отдельные методы 
                     {
                         FormsAuthentication.SetAuthCookie(model.Name, false);
                         this.log.Info("User " + model.Name + " logged in");
