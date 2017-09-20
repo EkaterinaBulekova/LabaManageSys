@@ -17,6 +17,7 @@ namespace LabaManageSys.WebUI.Models
                 this.Comment = rating.Comment ?? string.Empty;
                 this.UserId = rating.UserId;
                 this.TaskId = rating.TaskId;
+                this.UserName = rating.User.Name;
             }
         }
 
@@ -27,6 +28,8 @@ namespace LabaManageSys.WebUI.Models
         public string Comment { get; set; }
 
         public int UserId { get; set; }
+
+        public string UserName { get; set; }
 
         public int TaskId { get; set; }
     }

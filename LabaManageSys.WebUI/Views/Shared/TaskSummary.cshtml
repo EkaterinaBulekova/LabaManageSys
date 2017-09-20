@@ -1,4 +1,5 @@
 ﻿@model LabaManageSys.WebUI.ViewModels.Task.TaskViewModel
+@using LabaManageSys.WebUI.HtmlHelpers
 
 <div class="well">
     <div class="btn-group pull-right">
@@ -14,43 +15,27 @@
     <h4>Тема: @Model.Task.Topic уровень: @Model.Task.Level автор: @Model.Task.Author</h4>
     <h4>@Model.Task.Name</h4>
     <div class="well" id="@string.Format($"textwellp{Model.Task.TaskId}")" style="display:block">
+        <div style="float: right; align-content: flex-start">
+            @for (int i = 5; i >= 1; i--)
+            {
+                <div style="display:inherit">
+                    <div style="display:inline-flex;">
+                        <ul class="rating" style="display:inherit">
+                            @Html.Stars(i);
+                        </ul>
+                        <span style="display:inherit">@string.Format($" - {Model.PercentFeature[i - 1]}%")</span>
+                    </div>
+                </div>
+            }
+        </div>
         <div>
             <ul class="rating">
-                @for (int i = 1; i < 6; i++)
-                {
-                    if (Model.AvgRating >= i)
-                    {
-                        <li><a style="background:url(/images/star.jpg) center;"></a></li>;
-                    }
-                    else
-                    {
-                        if (Model.AvgRating >= i - 0.2)
-                        {
-                            <li><a style="background:url(/images/star1.jpg) center;"></a></li>;
-                        }
-                        else
-                        {
-                            if (Model.AvgRating >= i - 0.5)
-                            {
-                                <li><a style="background:url(/images/star1.jpg) top;"></a></li>;
-                            }
-                            else
-                            {
-                                if (Model.AvgRating >= i - 0.8)
-                                {
-                                    <li><a style="background:url(/images/star1.jpg) bottom;"></a></li>;
-                                }
-                                else
-                                {
-                                    <li><a style="background:url(/images/star.jpg) bottom;"></a></li>;
-                                }
-                            }
-                        }
-                    }
-                }
+                @Html.Stars(Model.AvgRating);
             </ul>
         </div>
-        <p>@string.Format($"{Model.AvgRating:0.0}")</p>
+
+        <p>@Model.AvgRating</p>
+
         <p>@Model.Task.Text.Substring(0, 10)</p> 
         <button id="@string.Format($"f{Model.Task.TaskId}")" class="btn btn-default">Подробнее</button>
     </div>

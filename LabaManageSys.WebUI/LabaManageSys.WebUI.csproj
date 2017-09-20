@@ -145,6 +145,7 @@
     <Content Include="Content\globalstyle.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\StarsStyle.css" />
+    <Content Include="Content\TableRotate.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -202,6 +203,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlHelpers\StarsHelpers.cs" />
     <Compile Include="HtmlHelpers\PagingHelpers.cs" />
     <Compile Include="Infrastructure\Binders\FilterModelBinder.cs" />
     <Compile Include="Infrastructure\Modules\RepositoryModule.cs" />
@@ -230,7 +232,6 @@
     <Compile Include="ViewModels\Task\EditViewModel.cs" />
     <Compile Include="ViewModels\Task\ListJsonModel.cs" />
     <Compile Include="ViewModels\Task\ListViewModel.cs" />
-    <Compile Include="ViewModels\Task\RatingViewModel.cs" />
     <Compile Include="ViewModels\Task\TaskViewModel.cs" />
     <Compile Include="ViewModels\TeachPlan\EditViewModel.cs" />
     <Compile Include="ViewModels\TeachPlan\ListViewModel.cs" />

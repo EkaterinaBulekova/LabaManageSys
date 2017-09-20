@@ -94,7 +94,7 @@ function processTaskComent(data, taskId) {
             }
         }
         stars += "</ul>";
-        str = "<div class=\"well\"><div>" + stars + "</div><p>" + item.Comment + "</p></div>";
+        str = "<div class=\"well\"><b>" + item.UserName + "</b><div style=\"float: right;\">" + stars + "</div><p>" + item.Comment + "</p></div>";
         Commentstarget.append(str);
     }
 }

@@ -27,6 +27,8 @@ namespace LabaManageSys.WebUI.Controllers
                     .Select(_ => new TaskViewModel
                     {
                         Task = _,
+                        PercentFeature = this.repository.GetRatingsByTaskPercents(_.TaskId),
+                        RatingsCount = this.repository.GetRatingsByTaskCount(_.TaskId),
                         AvgRating = this.repository.GetAvgRatingByTaskId(_.TaskId)
                     }),
                     Filter = filter,
@@ -95,6 +97,8 @@ namespace LabaManageSys.WebUI.Controllers
                     .Select(_ => new TaskViewModel
                     {
                         Task = _,
+                        PercentFeature = this.repository.GetRatingsByTaskPercents(_.TaskId),
+                        RatingsCount = this.repository.GetRatingsByTaskCount(_.TaskId),
                         AvgRating = this.repository.GetAvgRatingByTaskId(_.TaskId)
                     })
                 },

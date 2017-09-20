@@ -1,0 +1,17 @@
+﻿th.rotate {
+  /* Something you can count on */
+  height: 70px;
+  white-space: nowrap;
+}
+
+th.rotate > div {
+  transform:
+    /* Magic Numbers */
+    translate(0px, 51px)
+    /* 45 is really 360 - 45 */
+    rotate(270deg);
+  width: 10px;
+}
+th.rotate > div > span {
+  padding: 5px 10px;
+}

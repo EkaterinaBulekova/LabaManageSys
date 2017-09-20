@@ -10,6 +10,8 @@ namespace LabaManageSys.WebUI.Concrete
 {
     public class EFTasksRepository : ITasksRepository
     {
+        private readonly int maxEval = 5;
+        private readonly int maxPercent = 100;
         private IEFDbContext context;
 
         public EFTasksRepository(IEFDbContext cont)
@@ -168,7 +170,7 @@ namespace LabaManageSys.WebUI.Concrete
                 }
                 else
                 {
-                    return new RatingModel(new Rating { Comment = string.Empty, TaskId = taskId, UserId = user.UserId });
+                    return new RatingModel(new Rating { Comment = string.Empty, TaskId = taskId, UserId = user.UserId, User = user });
                 }
             }
 
@@ -186,7 +188,8 @@ namespace LabaManageSys.WebUI.Concrete
                     Evaluation = _.Evaluation,
                     TaskId = _.TaskId,
                     UserId = _.UserId,
-                    Comment = _.Comment
+                    Comment = _.Comment,
+                    UserName = _.User.Name
                 }); 
         }
 
@@ -226,6 +229,28 @@ namespace LabaManageSys.WebUI.Concrete
             }
 
             this.context.SaveChanges();
+        }
+
+        public int[] GetRatingsByTaskPercents(int taskId)
+        {
+            var persents = new int[this.maxEval];
+            var ratingsCount = this.GetRatingsByTaskCount(taskId);
+            if (ratingsCount != 0)
+            {
+                for (int i = 0; i < this.maxEval; i++)
+                {
+                    var eval = i + 1;
+                    persents[i] = (this.maxPercent * this.context.Ratings
+                        .Where(_ => _.TaskId == taskId && _.Evaluation == eval).Count()) / ratingsCount;
+                }
+            }
+
+            return persents;
+        }
+
+        public int GetRatingsByTaskCount(int taskId)
+        {
+            return this.context.Ratings.Where(_ => _.TaskId == taskId).Count();
         }
     }
 }

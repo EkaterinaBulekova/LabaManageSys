@@ -12,13 +12,17 @@
         }
     });
 }
+
 $(document).ready(function () {
     $("td").on("click", function () {
+        var target = $(this);
         var dt = new FormData();
-        dt.append('lessonId', $(this).data('LessonId'));
-        dt.append('userId', $(this).data('UserId'));
-        var removeUrl = $('#journal').data('request-Remove-url');
-        var addUrl = $('#journal').data('request-Add-url');
+        var lessId = $(this).attr('data-LessonId');
+        var userId = $(this).attr('data-UserId');
+        dt.append('lessonId', lessId);
+        dt.append('userId', userId);
+        var removeUrl = $("#journal").attr('data-request-Remove-url');
+        var addUrl = $("#journal").attr('data-request-Add-url');
         if ($(this).is(":contains('H')")) {
             $(this).text(" ");
             Ajax(removeUrl, dt);

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace LabaManageSys.WebUI.App_Start
 {
@@ -35,8 +32,9 @@ namespace LabaManageSys.WebUI.App_Start
                         "~/Content/site.css", 
                         "~/Content/bootstrap.min.css", 
                         "~/Content/globalstyle.css", 
-                        "~/Content/datepicker.min.css",
-                        "~/Content/StarsStyle.css"));
+                        "~/Content/datepicker.css",
+                        "~/Content/StarsStyle.css",
+                        "~/Content/TableRotate.css"));
         }
     }
 }

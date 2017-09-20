@@ -8,7 +8,6 @@
         @if (Model.Course.Name != null && Model.Course.Name != "")
         {
             <h3> Редактируем курс - "@Model.Course.Name"</h3>
-            <p> Занятия - @Model.Dates </p>
         }
         else
         {
@@ -28,7 +27,7 @@
             </div>
         </div>
         <div>
-                <input size="600" style="max-width: 600px" id="Dates" type="text" name="Dates" class="datepicker-here"
+                <input hidden size="600" style="max-width: 600px" id="Dates" type="text" name="Dates" class="datepicker-here"
                    data-multiple-dates="20"
                    data-multiple-dates-separator=","
                    data-timepicker="true"

@@ -32,5 +32,9 @@ namespace LabaManageSys.WebUI.Abstract
         void RatingDelete(int ratingId);
 
         void RatingUpdate(RatingModel rating);
+
+        int[] GetRatingsByTaskPercents(int taskId);
+
+        int GetRatingsByTaskCount(int taskId);
     }
 }
