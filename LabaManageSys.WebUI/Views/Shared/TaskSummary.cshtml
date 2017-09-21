@@ -15,7 +15,7 @@
     <h4>Тема: @Model.Task.Topic уровень: @Model.Task.Level автор: @Model.Task.Author</h4>
     <h4>@Model.Task.Name</h4>
     <div class="well" id="@string.Format($"textwellp{Model.Task.TaskId}")" style="display:block">
-        <div style="float: right; align-content: flex-start">
+        <div style="float: right;">
             @for (int i = 5; i >= 1; i--)
             {
                 <div style="display:inherit">
@@ -37,6 +37,7 @@
         <p>@Model.AvgRating</p>
 
         <p>@Model.Task.Text.Substring(0, 10)</p> 
+        <br />
         <button id="@string.Format($"f{Model.Task.TaskId}")" class="btn btn-default">Подробнее</button>
     </div>
     <div class="well" id="@string.Format($"textwellf{Model.Task.TaskId}")" style="display:none">

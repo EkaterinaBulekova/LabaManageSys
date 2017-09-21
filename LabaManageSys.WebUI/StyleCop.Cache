@@ -1333,9 +1333,6 @@
     </timestamps>
     <violations />
   </sourcecode>
-  <project key="1383194661">
-    <configuration>DEBUG;TRACE</configuration>
-  </project>
   <sourcecode name="StarsHelpers.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2017/09/15 19:40:57.566</styleCop>
@@ -1359,6 +1356,9 @@
     </timestamps>
     <violations />
   </sourcecode>
+  <project key="1383194661">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
   <sourcecode name="EditViewModel.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2017/09/15 19:40:57.566</styleCop>
