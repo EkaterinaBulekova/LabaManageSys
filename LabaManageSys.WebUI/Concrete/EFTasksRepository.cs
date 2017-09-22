@@ -48,7 +48,8 @@ namespace LabaManageSys.WebUI.Concrete
 
         public TaskModel GetTaskByName(string name)
         {
-            return new TaskModel(this.context.Tasks.FirstOrDefault(_ => _.Name == name));
+            var task = this.context.Tasks.FirstOrDefault(_ => _.Name == name);
+            return (task == null) ? null : new TaskModel(task);
         }
 
         public IEnumerable<TaskModel> GetTasksByFilter(FilterModel filter, int page, int pageSize)

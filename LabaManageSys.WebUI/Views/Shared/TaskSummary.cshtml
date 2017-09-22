@@ -5,17 +5,19 @@
     <div class="btn-group pull-right">
         @using (Html.BeginForm("Delete", "TaskManage"))
         {
-            @Html.ActionLink("Изменить", "Edit", new { Model.Task.TaskId }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Изменить", "Edit", new { Model.Task.TaskId }, new { @class = "btn btn-primary hidden-xs" })
+            @Html.ActionLink(" ", "Edit", new { Model.Task.TaskId }, new { @class = "btn btn-primary glyphicon glyphicon-edit visible-xs" })
             @Html.Hidden("TaskId", Model.Task.TaskId)
             <input type="submit"
-                   class="btn btn-danger"
+                   class="btn btn-danger hidden-xs"
                    value="Удалить" />
+            <button type="submit" formmethod="post" class="btn btn-danger glyphicon glyphicon-remove visible-xs"></button>
         }
     </div>
     <h4>Тема: @Model.Task.Topic уровень: @Model.Task.Level автор: @Model.Task.Author</h4>
     <h4>@Model.Task.Name</h4>
     <div class="well" id="@string.Format($"textwellp{Model.Task.TaskId}")" style="display:block">
-        <div style="float: right;">
+        <div class="hidden-xs" style="float: right;">
             @for (int i = 5; i >= 1; i--)
             {
                 <div style="display:inherit">
@@ -38,11 +40,13 @@
 
         <p>@Model.Task.Text.Substring(0, 10)</p> 
         <br />
-        <button id="@string.Format($"f{Model.Task.TaskId}")" class="btn btn-default">Подробнее</button>
+        <button id="@string.Format($"f{Model.Task.TaskId}")" class="btn btn-default hidden-xs">Подробнее</button>
+        <button id="@string.Format($"f{Model.Task.TaskId}")" class="btn btn-default glyphicon glyphicon-arrow-down visible-xs"></button>
     </div>
     <div class="well" id="@string.Format($"textwellf{Model.Task.TaskId}")" style="display:none">
         <div>
-            <button id="@string.Format($"p{Model.Task.TaskId}")" class="btn btn-default" style="float: right; vertical-align:top">Закрыть</button>
+            <button id="@string.Format($"p{Model.Task.TaskId}")" class="btn btn-default hidden-xs" style="float: right; vertical-align:top">Закрыть</button>
+            <button id="@string.Format($"p{Model.Task.TaskId}")" class="btn btn-default glyphicon glyphicon-arrow-up visible-xs" style="float: right; vertical-align:top"></button>
         </div>
         <br />
         <div>@Model.Task.Text</div>

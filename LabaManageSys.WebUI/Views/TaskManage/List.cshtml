@@ -10,23 +10,29 @@
      <h3> Список заданий </h3>
     </div>
     <div class="btn-group pull-right">
-        @Html.ActionLink("Добавить задание", "Create", "TaskManage", new { area = "" }, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Загрузить задания", "Index", "TaskLoad", new { area = "" }, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Скачать задания", "DownloadFile", "TaskLoad", new { area = "" }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Добавить задание", "Create", "TaskManage", new { area = "" }, new { @class = "btn btn-primary hidden-xs" })
+        @Html.ActionLink("Загрузить задания", "Index", "TaskLoad", new { area = "" }, new { @class = "btn btn-primary hidden-xs" })
+        @Html.ActionLink("Скачать задания", "DownloadFile", "TaskLoad", new { area = "" }, new { @class = "btn btn-primary hidden-xs" })
+        @Html.ActionLink(" ", "Create", "TaskManage", new { area = "" }, new { @class = "btn btn-primary glyphicon glyphicon-plus visible-xs" })
+        @Html.ActionLink(" ", "Index", "TaskLoad", new { area = "" }, new { @class = "btn btn-primary glyphicon glyphicon-upload visible-xs" })
+        @Html.ActionLink(" ", "DownloadFile", "TaskLoad", new { area = "" }, new { @class = "btn btn-primary glyphicon glyphicon-download visible-xs" })
     </div>
     <div class="panel-body">
-        <div>
-            Автор:
+        <div style="display:inline-flex">
+            <span class="hidden-xs">Автор:</span>  
+            <span class="visible-xs glyphicon glyphicon-user"></span>
             @Html.DropDownListFor(_ => _.Filter.Author, new SelectList(Model.Lists.Authors.ToList(), "all"), "all", new { @class = "dropdown" })
-             Тема:
+            <span class="hidden-xs">Тема:</span>   
+            <span class="visible-xs glyphicon glyphicon-bookmark"></span>
             @Html.DropDownListFor(_ => _.Filter.Topic, new SelectList(Model.Lists.Topics.ToList(), "all"), "all", new { @class = "dropdown" })
-             Уровень сложности:
+            <span class="hidden-xs">Уровень сложности:</span>   
+            <span class="visible-xs glyphicon glyphicon-scale"></span>
             @Html.DropDownListFor(_ => _.Filter.Level, new SelectList(Model.Lists.Levels.ToList(), "all"), "all", new { @class = "dropdown" })
         </div>
         <div id="TasksList" 
              data-request-tasks-url="@Url.Action("GetTasksDataJson")?" 
              data-request-comments-url="@Url.Action("GetTaskComentsJson")?taskId="
-             data-request-taskdelete-url="@Url.Action("Delete", "TaskManage")?TaskId="
+             data-request-taskdelete-url="@Url.Action("Delete", "TaskManage")"
              data-request-taskedit-url="@Url.Action("Edit", "TaskManage")?TaskId="
              data-request-commentdelete-url="@Url.Action("DeleteComment","TaskManage")"
              data-request-commentsave-url="@Url.Action("SaveComment","TaskManage")">
