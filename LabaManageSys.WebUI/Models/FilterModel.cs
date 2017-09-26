@@ -13,8 +13,6 @@ namespace LabaManageSys.WebUI.Models
 
         public string Topic { get; set; }
 
-        public int TagId { get; set; }
-
         public string Tags { get; set; }
     }
 }

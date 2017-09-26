@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using LabaManageSys.Domain.EntitiesModel;
 using LabaManageSys.XML.Models;
 
@@ -19,6 +20,13 @@ namespace LabaManageSys.WebUI.Models
             this.TaskId = task.TaskId;
             this.Text = task.Text;
             this.Topic = task.Topic;
+            this.Tags = task.Tags.Select(_ => 
+            new TagModel
+            {
+                TagId = _.TagId,
+                Name = _.Name
+            }).ToList();
+            this.TagString = string.Join(", ", this.Tags.Select(_ => _.Name).ToList());
         }
 
         public TaskModel(TaskXMLModel task)
@@ -58,5 +66,7 @@ namespace LabaManageSys.WebUI.Models
         public string Text { get; set; }
 
         public List<TagModel> Tags { get; set; }
+
+        public string TagString { get; set; }
     }
 }

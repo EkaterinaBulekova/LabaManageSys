@@ -49,6 +49,9 @@
                     @Html.TextAreaFor(_ => _.Task.Text, new { @class = "form-control", rows = 5 })
                 </div>
             </div>
+            <div class="form-group">
+                <input name="Task.TagString" type="text" class="form-control" id="tokenfield" value="@Model.Task.TagString" />
+            </div>
         </div>
         <div class="panel-footer">
             <input type="submit" value="Сохранить" class="btn btn-primary" />
@@ -60,4 +63,30 @@
     }
 </div>
 
+@section scripts{
+<script type="text/javascript">
+    function TagsAjax(text) {
+        var tx = (text == undefined) ? text : "?text="+text
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            url: "@Url.Action("GetTagsDataJson", "TaskManage")" + tx,
+            success: function (data) {
+                $('#tokenfield').tokenfield({
+                    autocomplete: {
+                        source: data,
+                        delay: 100
+                    },
+                    showAutocompleteOnFocus: false
+                })
+            }
+        });
+    }
 
+    $("#Task_Text").focusout(function () {
+        var text = $(this).val();
+        TagsAjax(text);
+    });
+</script>
+    }

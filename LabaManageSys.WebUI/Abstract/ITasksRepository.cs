@@ -13,10 +13,6 @@ namespace LabaManageSys.WebUI.Abstract
 
         IEnumerable<TaskModel> GetTasksByFilter(FilterModel filterModel, int page, int pageSize);
 
-        IEnumerable<TaskModel> GetTasksByTags(List<string> tags, int page, int pageSize);
-
-        IEnumerable<TaskModel> GetTasksByTag(TagModel tag, int page, int pageSize);
-
         TaskModel TaskDelete(int taskId);
 
         TaskModel GetTaskById(int taskId);
@@ -42,5 +38,7 @@ namespace LabaManageSys.WebUI.Abstract
         int[] GetRatingsByTaskPercents(int taskId);
 
         int GetRatingsByTaskCount(int taskId);
+
+        IEnumerable<TagModel> GetTags(string text);
     }
 }

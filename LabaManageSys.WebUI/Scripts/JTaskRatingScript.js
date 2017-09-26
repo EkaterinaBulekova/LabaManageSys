@@ -239,10 +239,9 @@ $(document).ready(function () {
 
         if (str == 't') {
             id = $(this).attr('id').substring(1);
-            var tx = $(this).Text;
             tx = $(this).attr('name');
-            $('#tokenfield').tokenfield('setTokens', [{ value: id, label: tx }]);
-            AjaxTask(taskurl, "tagId", id, processTaskData)
+            $('#tokenfield').tokenfield('setTokens', [{ value: tx, label: tx }]);
+            AjaxTask(taskurl, "tags", tx, processTaskData)
         }
 
         if (str == 'd') {

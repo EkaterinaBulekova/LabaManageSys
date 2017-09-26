@@ -9,14 +9,10 @@
      <h3> Список заданий </h3>
         <div>
             <div class="form-group">
-                <input type="text" class="form-control" id="tokenfield" value="" />
-                <a class="btn btn-info glyphicon glyphicon-search" id="search"></a>
+                <input type="text" class="form-control" id="tokenfield" value="@Model.Filter.Tags" />
             </div>
         </div>
     </div>
-
-
-
         <div class="btn-group pull-right">
             @Html.ActionLink("Добавить задание", "Create", "TaskManage", new { area = "" }, new { @class = "btn btn-primary hidden-xs" })
             @Html.ActionLink("Загрузить задания", "Index", "TaskLoad", new { area = "" }, new { @class = "btn btn-primary hidden-xs" })
@@ -70,15 +66,24 @@
                         source: data,
                         delay: 100
                     },
-                    showAutocompleteOnFocus: true
+                    showAutocompleteOnFocus: false
                 })
             }
         });
 
         $("#search").on('click', function () {
-            var tags = $('#tokenfield').tokenfield('getTokensList', beautify = false);
-            alert(tags);
         });
+        function TokenChange() {
+            var tags = $('#tokenfield').tokenfield('getTokensList', ',', false, false);
+            taskurl = $("#TasksList").data('request-tasks-url')
+            AjaxTask(taskurl, "tags", tags, processTaskData);
+        }
+        $('#tokenfield').on('tokenfield:createdtoken', function (e) {
+            TokenChange();
+        })
+        $('#tokenfield').on('tokenfield:removedtoken', function (e) {
+            TokenChange();
+        })
     </script>
 }
 

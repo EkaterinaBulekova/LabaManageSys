@@ -66,11 +66,12 @@ namespace LabaManageSys.WebUI.Concrete
 
         public IEnumerable<TaskModel> GetTasksByFilter(FilterModel filter, int page, int pageSize)
         {
+            var tags = this.context.Tags.Where(_ => filter.Tags.Contains(_.Name));
             var tasks = this.context.Tasks
                 .Where(_ => (filter.Author == null || filter.Author == string.Empty || _.Author == filter.Author)
                          && (filter.Topic == null || filter.Topic == string.Empty || _.Topic == filter.Topic)
                          && (filter.Level == 0 || _.Level == filter.Level)
-                         && (filter.TagId == 0 || _.Tags.Any(tg => tg.TagId == filter.TagId)))
+                         && (filter.Tags == null || tags.All(t => _.Tags.Contains(t))))
                 .OrderBy(_ => _.TaskId)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
@@ -88,57 +89,6 @@ namespace LabaManageSys.WebUI.Concrete
                         Name = t.Name
                     }).ToList()
                 }).ToList();
-            return tasks;
-        }
-
-        public IEnumerable<TaskModel> GetTasksByTags(List<string> tags, int page, int pageSize)
-        {
-            var tgs = this.context.Tags.Where(_ => tags.Contains(_.Name));
-            var tasks = this.context.Tasks
-                .Where(ts => tgs.All(tg => ts.Tags.Contains(tg)))
-                .OrderBy(_ => _.TaskId)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .Select(_ => new TaskModel
-                {
-                    TaskId = _.TaskId,
-                    Author = _.Author,
-                    Level = _.Level,
-                    Text = _.Text,
-                    Name = _.Name,
-                    Topic = _.Topic,
-                    Tags = _.Tags.Select(t => new TagModel
-                    {
-                        TagId = t.TagId,
-                        Name = t.Name
-                    }).ToList()
-                })
-                .ToList();
-            return tasks;
-        }
-
-        public IEnumerable<TaskModel> GetTasksByTag(TagModel tag, int page, int pageSize)
-        {
-            var tasks = this.context.Tags.FirstOrDefault(_ => _.TagId == tag.TagId)
-                .Tasks
-                .OrderBy(_ => _.TaskId)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .Select(_ => new TaskModel
-                {
-                    TaskId = _.TaskId,
-                    Author = _.Author,
-                    Level = _.Level,
-                    Text = _.Text,
-                    Name = _.Name,
-                    Topic = _.Topic,
-                    Tags = _.Tags.Select(t => new TagModel
-                    {
-                        TagId = t.TagId,
-                        Name = t.Name
-                    }).ToList()
-                })
-                .ToList();
             return tasks;
         }
 
@@ -185,6 +135,9 @@ namespace LabaManageSys.WebUI.Concrete
 
         public void TaskUpdate(TaskModel task)
         {
+            this.AddNewTags(task.TagString);
+            var tags = this.context.Tags.Where(_ => task.TagString.Contains(_.Name)).ToList();
+
             if (task.TaskId == 0)
             {
                 this.context.Tasks.Add(new Task
@@ -193,7 +146,8 @@ namespace LabaManageSys.WebUI.Concrete
                     Level = task.Level,
                     Text = task.Text,
                     Topic = task.Topic,
-                    Name = task.Name
+                    Name = task.Name,
+                    Tags = tags                    
                 });
             }
             else
@@ -206,6 +160,7 @@ namespace LabaManageSys.WebUI.Concrete
                     taskDbentry.Topic = task.Topic;
                     taskDbentry.Name = task.Name;
                     taskDbentry.Text = task.Text;
+                    taskDbentry.Tags = tags;
                 }
             }
 
@@ -322,6 +277,27 @@ namespace LabaManageSys.WebUI.Concrete
         public int GetRatingsByTaskCount(int taskId)
         {
             return this.context.Ratings.Where(_ => _.TaskId == taskId).Count();
+        }
+
+        public IEnumerable<TagModel> GetTags(string text)
+        {
+            var tags = this.context.Tags.Where(_ => string.IsNullOrEmpty(text) || text.Contains(_.Name)).ToList();
+            return tags.Select(_ => new TagModel(_)).ToList();
+        }
+
+        private void AddTag(string name)
+        {
+            this.context.Tags.Add(new Tag { Name = name });
+            this.context.SaveChanges();
+        }
+
+        private void AddNewTags(string tagString)
+        {
+            var tags = this.context.Tags.Where(_ => tagString.Contains(_.Name)).ToList();
+            var strTags = tagString.Replace(", ", ",").Split(',');
+            var tgs = tags.Select(_ => _.Name).ToList();
+            var newTags = strTags.Except(tgs).ToList();
+            newTags.ForEach(_ => this.AddTag(_));
         }
     }
 }
