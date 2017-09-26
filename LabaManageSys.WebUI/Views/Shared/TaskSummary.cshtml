@@ -37,19 +37,29 @@
         </div>
 
         <p>@Model.AvgRating</p>
-
-        <p>@Model.Task.Text.Substring(0, 10)</p> 
-        <br />
-        <button id="@string.Format($"f{Model.Task.TaskId}")" class="btn btn-default hidden-xs">Подробнее</button>
+        <span>@Model.Task.Text.Substring(0, 10)</span> 
+        <button id="@string.Format($"f{Model.Task.TaskId}")" class="btn btn-default btn-sm hidden-xs">...</button>
         <button id="@string.Format($"f{Model.Task.TaskId}")" class="btn btn-default glyphicon glyphicon-arrow-down visible-xs"></button>
+        <br />
+        <br />
+        @foreach (var tag in Model.Task.Tags)
+        {
+            <button id="@string.Format($"t{tag.TagId}")" class="btn btn-info btn-sm hidden-xs">@tag.Name</button>
+        }
     </div>
     <div class="well" id="@string.Format($"textwellf{Model.Task.TaskId}")" style="display:none">
         <div>
-            <button id="@string.Format($"p{Model.Task.TaskId}")" class="btn btn-default hidden-xs" style="float: right; vertical-align:top">Закрыть</button>
+            <button id="@string.Format($"p{Model.Task.TaskId}")" class="btn btn-default hidden-xs" style="float: right; vertical-align:top">Свернуть</button>
             <button id="@string.Format($"p{Model.Task.TaskId}")" class="btn btn-default glyphicon glyphicon-arrow-up visible-xs" style="float: right; vertical-align:top"></button>
         </div>
         <br />
         <div>@Model.Task.Text</div>
+        <br />
+        @foreach (var tag in Model.Task.Tags)
+        {
+            <button id="@string.Format($"t{tag.TagId}")" class="btn btn-info btn-sm hidden-xs">@tag.Name</button>
+        }
+        <br />
         <div id="@string.Format($"coment{Model.Task.TaskId}")"></div>
     </div> 
 </div>

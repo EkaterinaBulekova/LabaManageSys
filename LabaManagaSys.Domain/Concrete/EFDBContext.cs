@@ -22,6 +22,8 @@ namespace LabaManageSys.Domain.Concrete
 
         public virtual IDbSet<Task> Tasks { get; set; }
 
+        public virtual IDbSet<Tag> Tags { get; set; }
+
         public virtual IDbSet<Rating> Ratings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -51,6 +53,17 @@ namespace LabaManageSys.Domain.Concrete
                 .HasMany(e => e.Ratings)
                 .WithRequired(e => e.Task)
                 .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Tag>()
+            .HasMany(e => e.Tasks)
+            .WithMany(e => e.Tags)
+            .Map(m => m.ToTable("Tasks_tags").MapLeftKey("TagId").MapRightKey("TaskId"));
+
+            modelBuilder.Entity<Tag>()
+            .Property(t => t.Name)
+            .HasColumnAnnotation(
+            "Index",
+            new IndexAnnotation(new IndexAttribute("IX_Name") { IsUnique = true }));
         }
     }
 }

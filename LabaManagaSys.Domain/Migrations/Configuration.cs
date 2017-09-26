@@ -1,4 +1,4 @@
-namespace LabaManagaSys.Domain.Migrations
+namespace LabaManageSys.Domain.Migrations
 {
     using System.Data.Entity.Migrations;
 

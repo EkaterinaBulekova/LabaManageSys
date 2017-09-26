@@ -8,6 +8,8 @@ namespace LabaManageSys.Domain.EntitiesModel
         public Task()
         {
             this.Ratings = new HashSet<Rating>();
+            
+            this.Tags = new HashSet<Tag>();
         }
 
         [Required]
@@ -37,5 +39,7 @@ namespace LabaManageSys.Domain.EntitiesModel
         public string Text { get; set; }
 
         public virtual ICollection<Rating> Ratings { get; set; }
+
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 }

@@ -8,10 +8,12 @@ namespace LabaManageSys.WebUI.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-3.1.1.min.js"));
+                        "~/Scripts/jquery-3.1.1.min.js",
+                        "~/Scripts/jquery-ui-1.12.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                        "~/Scripts/bootstrap.min.js"));
+                        "~/Scripts/bootstrap.min.js",
+                        "~/Scripts/bootstrap-tokenfield.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/taskrating").Include(
                         "~/Scripts/JTaskRatingScript.js"));
@@ -30,10 +32,12 @@ namespace LabaManageSys.WebUI.App_Start
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/site.css", 
-                        "~/Content/bootstrap.min.css", 
+                        "~/Content/bootstrap.min.css",
+                        "~/Content/themes/base/jquery-ui.css", 
                         "~/Content/globalstyle.css", 
                         "~/Content/datepicker.css",
                         "~/Content/StarsStyle.css",
+                        "~/Content/bootstrap-tokenfield.css",
                         "~/Content/TableRotate.css"));
         }
     }

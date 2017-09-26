@@ -62,12 +62,21 @@
     <Compile Include="EntitiesModel\Course.cs" />
     <Compile Include="EntitiesModel\Rating.cs" />
     <Compile Include="EntitiesModel\Role.cs" />
+    <Compile Include="EntitiesModel\Tag.cs" />
     <Compile Include="EntitiesModel\Task.cs" />
     <Compile Include="Infrastructure\DataModule.cs" />
+    <Compile Include="Migrations\201709220520078_Initial.cs" />
+    <Compile Include="Migrations\201709220520078_Initial.Designer.cs">
+      <DependentUpon>201709220520078_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709220520078_Initial.resx">
+      <DependentUpon>201709220520078_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

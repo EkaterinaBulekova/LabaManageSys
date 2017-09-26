@@ -15,6 +15,8 @@ namespace LabaManageSys.Domain.Abstract
 
         IDbSet<Task> Tasks { get; set; }
 
+        IDbSet<Tag> Tags { get; set; }
+
         IDbSet<Rating> Ratings { get; set; }
 
         int SaveChanges();

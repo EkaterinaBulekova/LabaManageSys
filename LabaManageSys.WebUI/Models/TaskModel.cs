@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using LabaManageSys.Domain.EntitiesModel;
 using LabaManageSys.XML.Models;
 
@@ -55,5 +56,7 @@ namespace LabaManageSys.WebUI.Models
         [Required]
         [Display(Name = "Текст задания")]
         public string Text { get; set; }
+
+        public List<TagModel> Tags { get; set; }
     }
 }

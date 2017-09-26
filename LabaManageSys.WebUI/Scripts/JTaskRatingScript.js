@@ -38,8 +38,23 @@ function GetPercents(percents) {
         starPercents += GetStars(i);
         starPercents += "<span style='display:inherit'> - " + percents[i - 1] + "%</span></div></div>";
     }
+
     starPercents += "</div>";
     return starPercents;
+}
+
+function GetButtons(tags) {
+    var buttons = "";
+    if (tags != null) {
+        for (i = 0; i < tags.length; i++) {
+            buttons += "<button id='t" + tags[i].TagId + "' class='btn btn-info btn-sm hidden-xs' style='margin-right:3px;' name='" + tags[i].Name + "'>" + tags[i].Name + "</button>";
+        }
+    }
+    else {
+        buttons += "<br />"
+    }
+
+    return buttons;
 }
 
 function processTaskData(data) {
@@ -54,6 +69,7 @@ function processTaskData(data) {
         var avgrating = item.AvgRating;
         var percents = GetPercents(item.PercentFeature);
         var stars = GetStars(avgrating);
+        var buttons = GetButtons(item.Task.Tags);
         Taskstarget.append("<div class='well'><div class='btn-group pull-right'><form action='" + urlDelete +
             "' method='post'><a class='btn btn-primary glyphicon glyphicon-edit visible-xs' style='margin-right:4px; border-radius:3px;' href='" +
             urlEdit + item.Task.TaskId + "'></a><a class='btn btn-primary hidden-xs' style='margin-right:4px; border-radius:3px;' href='" +
@@ -62,12 +78,13 @@ function processTaskData(data) {
             "<button type='submit' class='btn btn-danger hidden-xs' style='border-radius:3px;'>Удалить</button></form></div><h4>Тема: " +
             item.Task.Topic + " уровень: " + item.Task.Level + " автор: " + item.Task.Author + "</h4><h4>" + item.Task.Name +
             "</h4><div class='well' id='textwellp" + item.Task.TaskId + "' style='display:block'>" + percents + "<div>" + stars + "</div><p>" +
-            avgrating + "</p><p>" + item.Task.Text.substring(0, 10) + "</p><br /><button id='f" + item.Task.TaskId +
-            "' class='btn btn-default hidden-xs'>Подробнее</button ><button id='f" + item.Task.TaskId +
-            "' class='btn btn-default glyphicon glyphicon-arrow-down visible-xs'></button ></div ><div class='well' id='textwellf" + item.Task.TaskId +
-            "' style='display:none'><div class='btn-group pull-right'><button id='p" + item.Task.TaskId + "' class='btn btn-default hidden-xs' " +
-            "style='float: right;'>Закрыть</button><button id='p" + item.Task.TaskId + "' class='btn btn-default glyphicon glyphicon-arrow-up visible-xs' " +
-            "style='float: right;'></button></div><br><div>" + item.Task.Text + "</div><div id='coment" + item.Task.TaskId + "'></div></div>");
+            avgrating + "</p><span>" + item.Task.Text.substring(0, 10) + "</span><button id='f" + item.Task.TaskId +
+            "' class='btn btn-default btn-sm hidden-xs'>...</button ><button id='f" + item.Task.TaskId +
+            "' class='btn btn-default glyphicon glyphicon-arrow-down visible-xs'></button ><br /><br />" + buttons +
+            "</div ><div class='well' id='textwellf" + item.Task.TaskId + "' style='display:none'><div class='btn-group pull-right'><button id='p" +
+            item.Task.TaskId + "' class='btn btn-default btn-sm hidden-xs' style='float: right;'>Свернуть</button><button id='p" +
+            item.Task.TaskId + "' class='btn btn-default glyphicon glyphicon-arrow-up visible-xs' style='float: right;'></button></div><br/><div>" +
+            item.Task.Text + "</div><br />" + buttons + "<div id='coment" + item.Task.TaskId + "'></div></div>");
     }
     var Buttonstarget = $("#ButtonsGroup");
     Buttonstarget.empty();
@@ -115,11 +132,12 @@ function processTaskComent(data, taskId) {
 }
 
 function AjaxTask(taskLoadUrl, optionName, selectedValue, callback) {
+    var fullurl = (optionName != "") ? taskLoadUrl + optionName + "=" + selectedValue : taskLoadUrl;
     $.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        url: taskLoadUrl + optionName + "=" + selectedValue,
+        url: fullurl,
         success: function (result) {
             callback(result);
         },
@@ -199,6 +217,7 @@ $(document).ready(function () {
         var start = 'textwell';
         var str = $(this).attr('id').substring(0, 1);
         var url = $("#TasksList").data('request-comments-url');
+        var taskurl = $("#TasksList").data('request-tasks-url');
 
         if (str == 'f') {
             id = $(this).attr('id').substring(1);
@@ -215,6 +234,15 @@ $(document).ready(function () {
             $(fullid).hide();
             fullid = '#' + start + 'p' + id;
             $(fullid).show();
+            AjaxTask(taskurl, "", "", processTaskData)
+        }
+
+        if (str == 't') {
+            id = $(this).attr('id').substring(1);
+            var tx = $(this).Text;
+            tx = $(this).attr('name');
+            $('#tokenfield').tokenfield('setTokens', [{ value: id, label: tx }]);
+            AjaxTask(taskurl, "tagId", id, processTaskData)
         }
 
         if (str == 'd') {

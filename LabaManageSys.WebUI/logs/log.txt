@@ -568,3 +568,57 @@ Parameter name: linkText
    at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
    at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
 2017-09-22 10:01:46,670 [10] INFO  - User Ivan logged in
+2017-09-22 16:00:32,960 [7] INFO  - User Ivan logged in
+2017-09-22 16:01:54,432 [7] INFO  - User Ivan logged in
+2017-09-22 16:05:03,937 [6] INFO  - User Ivan logged in
+2017-09-22 16:06:08,538 [9] INFO  - User Ivan logged in
+2017-09-22 16:08:06,816 [8] INFO  - User Ivan logged in
+2017-09-22 16:25:17,744 [7] INFO  - User Ivan logged in
+2017-09-22 16:27:21,222 [6] INFO  - User Ivan logged in
+2017-09-22 16:29:17,432 [7] INFO  - User Ivan logged in
+2017-09-22 16:30:18,833 [5] INFO  - User Ivan logged in
+2017-09-22 16:37:20,733 [9] INFO  - User Ivan logged in
+2017-09-22 16:37:26,953 [8] DEBUG - System.ArgumentException: The parameters dictionary contains a null entry for parameter 'taskId' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult GetTaskComentsJson(Int32)' in 'LabaManageSys.WebUI.Controllers.TaskManageController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+   at System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+2017-09-22 16:42:06,574 [7] INFO  - User Ivan logged in
+2017-09-22 16:42:15,636 [5] DEBUG - System.ArgumentException: The parameters dictionary contains a null entry for parameter 'taskId' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult GetTaskComentsJson(Int32)' in 'LabaManageSys.WebUI.Controllers.TaskManageController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+   at System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+2017-09-22 16:46:32,901 [7] INFO  - User Ivan logged in
+2017-09-22 17:08:35,047 [7] INFO  - User Ivan logged in
+2017-09-22 17:27:45,339 [6] INFO  - User Ivan logged in
+2017-09-25 10:37:22,534 [8] INFO  - User Ivan logged in
+2017-09-25 14:07:22,767 [9] INFO  - User Ivan logged in
+2017-09-25 14:47:06,094 [8] INFO  - User Ivan logged in
+2017-09-25 15:12:58,504 [5] INFO  - User Ivan logged in
+2017-09-25 16:28:04,406 [9] INFO  - User Ivan logged in
+2017-09-25 16:46:00,370 [7] INFO  - User Ivan logged in

@@ -72,9 +72,10 @@ namespace LabaManageSys.WebUI.Controllers
             }
         }
 
-        public ActionResult GetTasksDataJson(FilterModel filter, string author, string topic, string level)
+        public ActionResult GetTasksDataJson(FilterModel filter, string author, string topic, string level, string tagId)
         {
             filter.Level = (level == string.Empty) ? 0 : (level != null) ? int.Parse(level) : filter.Level;
+            filter.TagId = (tagId == string.Empty) ? 0 : (tagId != null) ? int.Parse(tagId) : filter.TagId;
             filter.Author = (author == string.Empty) ? string.Empty : author ?? filter.Author;
             filter.Topic = (topic == string.Empty) ? string.Empty : topic ?? filter.Topic;
             int totalItems = this.repository.GetTasksCount(filter);
@@ -104,6 +105,20 @@ namespace LabaManageSys.WebUI.Controllers
                 },
                 JsonRequestBehavior.AllowGet);
             return result;
+        }
+
+        public ActionResult GetTagsDataJson()
+        {
+            var result = Json(
+                this.repository.Tags.Select(_ => new { label = _.Name, value = _.TagId }).ToList(),
+                JsonRequestBehavior.AllowGet);
+            return result;
+        }
+
+        public ActionResult GetTag()
+        {
+            var token = string.Join(",", this.repository.Tags.Select(x => x.Name).ToList());
+            return this.Json(new { data = token.ToString().Split(',') }, JsonRequestBehavior.AllowGet);
         }
 
         public ViewResult Edit(int taskId)
