@@ -65,28 +65,10 @@
 
 @section scripts{
 <script type="text/javascript">
-    function TagsAjax(text) {
-        var tx = (text == undefined) ? text : "?text="+text
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            url: "@Url.Action("GetTagsDataJson", "TaskManage")" + tx,
-            success: function (data) {
-                $('#tokenfield').tokenfield({
-                    autocomplete: {
-                        source: data,
-                        delay: 100
-                    },
-                    showAutocompleteOnFocus: false
-                })
-            }
-        });
-    }
-
-    $("#Task_Text").focusout(function () {
-        var text = $(this).val();
-        TagsAjax(text);
+    $("#tokenfield").focus(function () {
+        var url = $("#container").data('request-tags-url');
+        var text = $("#Task_Text").val() + $("#Task_Name").val();
+        TagsAjax(url, text);
     });
 </script>
-    }
+}

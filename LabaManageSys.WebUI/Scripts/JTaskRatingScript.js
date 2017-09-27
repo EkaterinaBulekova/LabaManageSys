@@ -187,17 +187,21 @@ function Ajax(dt, curUrl, url, tid, callback){
 }
 
 $(document).ready(function () {
+    var Turl = $("#container").data('request-tags-url');
+    TagsAjax(Turl, undefined);
+
+
     $('select').change(function () {
-        var selectedValue = $(this).val();
-        var optionName = $(this).attr('name').substring(7);
-        var url = $("#TasksList").data('request-tasks-url');
+        let selectedValue = $(this).val();
+        let optionName = $(this).attr('name').substring(7);
+        let url = $("#TasksList").data('request-tasks-url');
         AjaxTask(url, optionName, selectedValue, processTaskData)
     })
 
     $("#TasksList").on('mouseover', 'a', function () {
-        var id = $(this).attr('id');
+        let id = $(this).attr('id');
         if (id != null) {
-            var pos = id.substring(id.length - 1);
+            let pos = id.substring(id.length - 1);
             id = id.substring(0, id.length - 2);
             $("#eval" + id).val(pos);
             for (var i = 1; i <= 6; i++) {
@@ -213,11 +217,11 @@ $(document).ready(function () {
     });
 
     $("#TasksList").on('click', 'button', function () {
-        var id = '';
-        var start = 'textwell';
-        var str = $(this).attr('id').substring(0, 1);
-        var url = $("#TasksList").data('request-comments-url');
-        var taskurl = $("#TasksList").data('request-tasks-url');
+        let id = '';
+        let start = 'textwell';
+        let str = $(this).attr('id').substring(0, 1);
+        let url = $("#TasksList").data('request-comments-url');
+        let taskurl = $("#TasksList").data('request-tasks-url');
 
         if (str == 'f') {
             id = $(this).attr('id').substring(1);
@@ -246,27 +250,44 @@ $(document).ready(function () {
 
         if (str == 'd') {
             id = $(this).attr('id').substring(1);
-            var tid = $(this).attr('data-taskId');
-            var dt = new FormData();
-            var deleteUrl = $("#TasksList").data('request-commentdelete-url');
+            let tid = $(this).attr('data-taskId');
+            let dt = new FormData();
+            let deleteUrl = $("#TasksList").data('request-commentdelete-url');
             dt.append('commentId', id);
             Ajax(dt, deleteUrl, url, tid, processTaskComent);
         }
 
         if (str == 's') {
             id = $(this).attr('id').substring(1);
-            var uid = $('#user' + id).val();
-            var rid = $('#rating' + id).val();
-            var eid = $('#eval' + id).val();
-            var cid = $('#comm' + id).val();
+            let uid = $('#user' + id).val();
+            let rid = $('#rating' + id).val();
+            let eid = $('#eval' + id).val();
+            let cid = $('#comm' + id).val();
             var dt = new FormData();
             dt.append('TaskId', id);
             dt.append('UserId', uid);
             dt.append('RatingId', rid);
             dt.append('Evaluation', eid);
             dt.append('Comment', cid);
-            var saveUrl = $("#TasksList").data('request-commentsave-url');
+            let saveUrl = $("#TasksList").data('request-commentsave-url');
             Ajax(dt, saveUrl, url, id, processTaskComent);
         }
+    })
+
+    $("#search").on('click', function () {
+    });
+
+    function TokenChange() {
+        var tags = $('#tokenfield').tokenfield('getTokensList', ',', false, false);
+        taskurl = $("#TasksList").data('request-tasks-url')
+        AjaxTask(taskurl, "tags", tags, processTaskData);
+    }
+
+    $('#tokenfield').on('tokenfield:createdtoken', function (e) {
+        TokenChange();
+    })
+
+    $('#tokenfield').on('tokenfield:removedtoken', function (e) {
+        TokenChange();
     })
 })

@@ -54,37 +54,6 @@
 
 @section scripts{
     @Scripts.Render("~/bundles/taskrating")
-    <script type="text/javascript">
-        $.ajax({
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            url:  $("#TasksList").data('request-tags-url'),
-            success: function (data) {
-                $('#tokenfield').tokenfield({
-                    autocomplete: {
-                        source: data,
-                        delay: 100
-                    },
-                    showAutocompleteOnFocus: false
-                })
-            }
-        });
-
-        $("#search").on('click', function () {
-        });
-        function TokenChange() {
-            var tags = $('#tokenfield').tokenfield('getTokensList', ',', false, false);
-            taskurl = $("#TasksList").data('request-tasks-url')
-            AjaxTask(taskurl, "tags", tags, processTaskData);
-        }
-        $('#tokenfield').on('tokenfield:createdtoken', function (e) {
-            TokenChange();
-        })
-        $('#tokenfield').on('tokenfield:removedtoken', function (e) {
-            TokenChange();
-        })
-    </script>
 }
 
 

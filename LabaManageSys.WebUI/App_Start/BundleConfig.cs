@@ -18,6 +18,9 @@ namespace LabaManageSys.WebUI.App_Start
             bundles.Add(new ScriptBundle("~/bundles/taskrating").Include(
                         "~/Scripts/JTaskRatingScript.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/tokens").Include(
+                        "~/Scripts/JTokens.js"));
+            
             bundles.Add(new ScriptBundle("~/bundles/journal").Include(
                         "~/Scripts/JJournalScript.js"));
 
