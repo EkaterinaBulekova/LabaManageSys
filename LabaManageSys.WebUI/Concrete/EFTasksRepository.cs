@@ -35,19 +35,7 @@ namespace LabaManageSys.WebUI.Concrete
             }
         }
 
-        public IEnumerable<TagModel> Tags
-        {
-            get
-            {
-                return this.context.Tags.Select(_ => new TagModel
-                {
-                    TagId = _.TagId,
-                    Name = _.Name
-                });
-            }
-        }
-
-        public FilterListsModel GetFilterLists()
+      public FilterListsModel GetFilterLists()
         {
             var filterLists = new FilterListsModel
             {
@@ -58,10 +46,25 @@ namespace LabaManageSys.WebUI.Concrete
             return filterLists;
         }
 
+        #region Task method
+
         public TaskModel GetTaskByName(string name)
         {
             var task = this.context.Tasks.FirstOrDefault(_ => _.Name == name);
             return (task == null) ? null : new TaskModel(task);
+        }
+
+        public TaskModel GetTaskById(int taskId)
+        {
+            return new TaskModel(this.context.Tasks.FirstOrDefault(_ => _.TaskId == taskId));
+        }
+
+        public int GetTasksCount(FilterModel filter)
+        {
+            return this.context.Tasks
+                .Where(_ => (filter.Author == null || filter.Author == string.Empty || _.Author == filter.Author)
+                         && (filter.Topic == null || filter.Topic == string.Empty || _.Topic == filter.Topic)
+                         && (filter.Level == 0 || _.Level == filter.Level)).Count();
         }
 
         public IEnumerable<TaskModel> GetTasksByFilter(FilterModel filter, int page, int pageSize)
@@ -90,14 +93,6 @@ namespace LabaManageSys.WebUI.Concrete
                     }).ToList()
                 }).ToList();
             return tasks;
-        }
-
-        public int GetTasksCount(FilterModel filter)
-        {
-            return this.context.Tasks
-                .Where(_ => (filter.Author == null || filter.Author == string.Empty || _.Author == filter.Author)
-                         && (filter.Topic == null || filter.Topic == string.Empty || _.Topic == filter.Topic)
-                         && (filter.Level == 0 || _.Level == filter.Level)).Count();
         }
 
         public ResultModel TaskAddAll(IEnumerable<TaskModel> tasks)
@@ -135,8 +130,13 @@ namespace LabaManageSys.WebUI.Concrete
 
         public void TaskUpdate(TaskModel task)
         {
-            this.AddNewTags(task.TagString);
-            var tags = this.context.Tags.Where(_ => task.TagString.Contains(_.Name)).ToList();
+            var tags = new List<Tag>();
+
+            if (task.TagString != null)
+            {
+                this.AddNewTags(task.TagString);
+                tags = this.context.Tags.Where(_ => task.TagString.ToUpper().Contains(_.Name.ToUpper())).ToList();
+            }
 
             if (task.TaskId == 0)
             {
@@ -167,11 +167,9 @@ namespace LabaManageSys.WebUI.Concrete
             this.context.SaveChanges();
         }
 
-        public TaskModel GetTaskById(int taskId)
-        {
-            return new TaskModel(this.context.Tasks.FirstOrDefault(_ => _.TaskId == taskId));
-        }
+        #endregion
 
+        #region Raiting method
         public double GetAvgRatingByTaskId(int taskId)
         {
             if (this.context.Ratings.Where(_ => _.TaskId == taskId).Count() > 0)
@@ -278,26 +276,29 @@ namespace LabaManageSys.WebUI.Concrete
         {
             return this.context.Ratings.Where(_ => _.TaskId == taskId).Count();
         }
+        #endregion
 
+        #region Tag method
         public IEnumerable<TagModel> GetTags(string text)
         {
-            var tags = this.context.Tags.Where(_ => string.IsNullOrEmpty(text) || text.Contains(_.Name)).ToList();
+            var tags = this.context.Tags.Where(_ => string.IsNullOrEmpty(text) || text.ToUpper().Contains(_.Name.ToUpper())).ToList();
             return tags.Select(_ => new TagModel(_)).ToList();
         }
 
         private void AddTag(string name)
         {
-            this.context.Tags.Add(new Tag { Name = name });
+            this.context.Tags.Add(new Tag { Name = name.ToUpper() });
             this.context.SaveChanges();
         }
 
         private void AddNewTags(string tagString)
         {
-            var tags = this.context.Tags.Where(_ => tagString.Contains(_.Name)).ToList();
-            var strTags = tagString.Replace(", ", ",").Split(',');
-            var tgs = tags.Select(_ => _.Name).ToList();
+            var tags = this.context.Tags.Where(_ => tagString.ToUpper().Contains(_.Name.ToUpper())).ToList();
+            var strTags = tagString.ToUpper().Replace(", ", ",").Split(',');
+            var tgs = tags.Select(_ => _.Name.ToUpper()).ToList();
             var newTags = strTags.Except(tgs).ToList();
             newTags.ForEach(_ => this.AddTag(_));
         }
+        #endregion
     }
 }

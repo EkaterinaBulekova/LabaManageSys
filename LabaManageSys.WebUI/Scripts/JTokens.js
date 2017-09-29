@@ -21,5 +21,19 @@
                 alert('Unexpected error.' + jqXHR.responseText);
             }
         }
-});
+    });
 }
+
+$('#tokenfield').on('tokenfield:createdtoken', function (event) {
+    var existingTokens = $(this).tokenfield('getTokens');
+    var count = 0;
+    $.each(existingTokens, function (index, token) {
+        if (token.value === event.attrs.value)
+            count++;
+    });
+    if (count > 1) {
+        existingTokens.pop();
+        var newTokens = existingTokens;
+    }
+    $(this).tokenfield('setTokens', newTokens);
+});

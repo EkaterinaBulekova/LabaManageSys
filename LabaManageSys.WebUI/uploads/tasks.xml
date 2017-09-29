@@ -1,6 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Tasks>
   <Task>
+    <Author>Alex</Author>
+    <Level>50</Level>
+    <Topic>ORM</Topic>
+    <Name>Task8</Name>
+    <Text>Some task TDD here.....HTML Css Http</Text>
+  </Task>
+  <Task>
+    <Author>Alex</Author>
+    <Level>40</Level>
+    <Topic>ORM</Topic>
+    <Name>Task9</Name>
+    <Text>Some task TDD here.....</Text>
+  </Task>
+  <Task>
+    <Author>Alex</Author>
+    <Level>80</Level>
+    <Topic>Entity</Topic>
+    <Name>Task10</Name>
+    <Text>Some task TDD here.....</Text>
+  </Task>
+  <Task>
+    <Author>Ninja</Author>
+    <Level>80</Level>
+    <Topic>MVC</Topic>
+    <Name>Task6</Name>
+    <Text>Some task DDD here.....</Text>
+  </Task>
+  <Task>
+    <Author>dgfdgfdg</Author>
+    <Level>50</Level>
+    <Topic>dfdfd gdgdgfd g</Topic>
+    <Name>dfdf df dfdffdfs</Name>
+    <Text>gfdf gd dgd gdgdd  gdgdgd  dgdgdgdg</Text>
+  </Task>
+  <Task>
+    <Author>dfgfgfd</Author>
+    <Level>70</Level>
+    <Topic>dgf d dgdgdgd d fdf</Topic>
+    <Name>CSS Task 45</Name>
+    <Text>Some text program... CSS and Jscript use TDD.</Text>
+  </Task>
+  <Task>
     <Author>Ninja</Author>
     <Level>80</Level>
     <Topic>DDD</Topic>
@@ -13,61 +55,5 @@
     <Topic>TDD</Topic>
     <Name>Task2</Name>
     <Text>Some task TDD here.....</Text>
-  </Task>
-  <Task>
-    <Author>Alex</Author>
-    <Level>50</Level>
-    <Topic>TDD</Topic>
-    <Name>Task3</Name>
-    <Text>Some task TDD here.....</Text>
-  </Task>
-  <Task>
-    <Author>Alex</Author>
-    <Level>40</Level>
-    <Topic>TDD</Topic>
-    <Name>Task4</Name>
-    <Text>Some task TDD here.....</Text>
-  </Task>
-  <Task>
-    <Author>Alex</Author>
-    <Level>80</Level>
-    <Topic>TDD</Topic>
-    <Name>Task5</Name>
-    <Text>Some task TDD here.....</Text>
-  </Task>
-  <Task>
-    <Author>Ninja</Author>
-    <Level>80</Level>
-    <Topic>MVC</Topic>
-    <Name>Task6</Name>
-    <Text>Some task MVC here.....</Text>
-  </Task>
-  <Task>
-    <Author>Alex</Author>
-    <Level>60</Level>
-    <Topic>MVC</Topic>
-    <Name>Task7</Name>
-    <Text>Some task MVC here.....</Text>
-  </Task>
-  <Task>
-    <Author>Alex</Author>
-    <Level>40</Level>
-    <Topic>ORM</Topic>
-    <Name>Task9</Name>
-    <Text>Some task ORM here.....</Text>
-  </Task>
-  <Task>
-    <Author>Alex</Author>
-    <Level>80</Level>
-    <Topic>Entity</Topic>
-    <Name>Task10</Name>
-    <Text>Some task Entity here.....</Text>
-  </Task>
-  <Task>
-    <Author>Katrin</Author>
-    <Level>30</Level>
-    <Topic>Entity</Topic>
-    <Name>Task11</Name>
-    <Text>Some task Entity here.....</Text>
   </Task>
 </Tasks>

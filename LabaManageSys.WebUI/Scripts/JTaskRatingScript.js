@@ -166,7 +166,7 @@ function AjaxComent(commentLoadUrl, taskId, callback) {
     });
 }
 
-function Ajax(dt, curUrl, url, tid, callback){
+function AjaxEdit(dt, curUrl, url, tid, callback){
     $.ajax({
         type: "POST",
         url: curUrl,
@@ -187,7 +187,7 @@ function Ajax(dt, curUrl, url, tid, callback){
 }
 
 $(document).ready(function () {
-    var Turl = $("#container").data('request-tags-url');
+    let Turl = $("#container").data('request-tags-url');
     TagsAjax(Turl, undefined);
 
 
@@ -204,7 +204,7 @@ $(document).ready(function () {
             let pos = id.substring(id.length - 1);
             id = id.substring(0, id.length - 2);
             $("#eval" + id).val(pos);
-            for (var i = 1; i <= 6; i++) {
+            for (let i = 1; i <= 6; i++) {
                 var star = $("#" + id + "s" + i);
                 if (i <= pos) {
                     star.css("background", "url(/images/star.jpg) center");
@@ -254,7 +254,7 @@ $(document).ready(function () {
             let dt = new FormData();
             let deleteUrl = $("#TasksList").data('request-commentdelete-url');
             dt.append('commentId', id);
-            Ajax(dt, deleteUrl, url, tid, processTaskComent);
+            AjaxEdit(dt, deleteUrl, url, tid, processTaskComent);
         }
 
         if (str == 's') {
@@ -270,18 +270,44 @@ $(document).ready(function () {
             dt.append('Evaluation', eid);
             dt.append('Comment', cid);
             let saveUrl = $("#TasksList").data('request-commentsave-url');
-            Ajax(dt, saveUrl, url, id, processTaskComent);
+            AjaxEdit(dt, saveUrl, url, id, processTaskComent);
         }
     })
 
-    $("#search").on('click', function () {
-    });
-
     function TokenChange() {
-        var tags = $('#tokenfield').tokenfield('getTokensList', ',', false, false);
+        let tags = $('#tokenfield').tokenfield('getTokensList', ',', false, false);
         taskurl = $("#TasksList").data('request-tasks-url')
         AjaxTask(taskurl, "tags", tags, processTaskData);
     }
+
+    $("#tokenfield").on("tokenfield:createtoken", function (e) {
+        let selectedToken = e.attrs.value;
+        let source = $('#tokenfield').data('bs.tokenfield').$input.autocomplete("option", "source");
+        let isExist = false;
+        let Index = 0;
+        $.each(source, function (index, token) {
+            if (token.value === selectedToken) {
+                isExist = true;
+                Index = index;
+            }
+        });
+        if (isExist === true) {
+            source.splice(Index, 1);
+            let newSource = source;
+            $('#tokenfield').data('bs.tokenfield').$input.autocomplete({ source: newSource });
+        }
+        else {
+            e.preventDefault();
+        }
+    });
+
+    $('#tokenfield').on('tokenfield:removetoken', function (e) {
+        let selectedToken = e.attrs.value;
+        let source = $('#tokenfield').data('bs.tokenfield').$input.autocomplete("option", "source");
+        source.push({ value: selectedToken, label: selectedToken });
+        let newSource = source;
+        $('#tokenfield').data('bs.tokenfield').$input.autocomplete({ source: newSource });
+    })
 
     $('#tokenfield').on('tokenfield:createdtoken', function (e) {
         TokenChange();

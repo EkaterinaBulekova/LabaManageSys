@@ -7,8 +7,6 @@ namespace LabaManageSys.WebUI.Abstract
     {
         IEnumerable<TaskModel> Tasks { get; }
 
-        IEnumerable<TagModel> Tags { get; }
-
         int GetTasksCount(FilterModel filter);
 
         IEnumerable<TaskModel> GetTasksByFilter(FilterModel filterModel, int page, int pageSize);
